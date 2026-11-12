@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scandal-o-Meter</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>Scandal-o-Meter <span aria-hidden="true">🚨</span></h1>
+  <p class="sub">A satirical scandal-risk rating for S&amp;P 500, AI and chip CEOs, based on public persona only. Not financial advice, not journalism.</p>
+  <p id="mockNote" class="mock" hidden>Demo mode: prices are fake.</p>
+</header>
+
+<section class="controls">
+  <input id="q" type="search" placeholder="Search company, ticker or CEO">
+  <select id="tier"><option value="">All tiers</option></select>
+  <select id="sector"><option value="">All sectors</option></select>
+  <select id="sort">
+    <option value="risk">Sort: risk score</option>
+    <option value="change">Sort: today's move</option>
+    <option value="name">Sort: name</option>
+  </select>
+  <label class="chk"><input id="unprof" type="checkbox"> Include unprofiled companies</label>
+</section>
+
+<section id="legend" class="legend"></section>
+<main id="grid" class="grid"></main>
+<p id="count" class="count"></p>
+
+<footer>
+  Scores: 📱 Posting 20% · 🥊 Feuds 25% · 🐸 Memes 15% · 🎤 Stunts 15% · 📰 Headlines 25%. Prices from Yahoo Finance, refreshed every minute.
+</footer>
+<script src="/app.js"></script>
+</body>
+</html>
