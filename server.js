@@ -60,7 +60,8 @@ function parseCSV(text) {
 function buildCompanies() {
   const sp = parseCSV(fs.readFileSync(path.join(__dirname, "data/sp500.csv"), "utf8"))
     .map(([symbol, name, sector, industry]) => ({ symbol, name, sector, industry, index: "S&P 500" }));
-  const extras = EXTRAS.map(([symbol, name, sector, industry]) => ({ symbol, name, sector, industry, index: "AI & Chips" }));
+  const have = new Set(sp.map((c) => c.symbol));
+  const extras = EXTRAS.filter(([s]) => !have.has(s)).map(([symbol, name, sector, industry]) => ({ symbol, name, sector, industry, index: "AI & Chips" }));
   return [...sp, ...extras].map((c) => {
     const p = profiles[c.symbol];
     if (!p) return { ...c, profiled: false, risk: null, tier: null };
@@ -120,7 +121,7 @@ function mockQuote(sym) {
   let h = 0; for (const c of sym) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   const base = 20 + (h % 900);
   const spark = []; let v = base;
-  for (let i = 0; i < 60; i++) { v *= 1 + (Math.sin(h + i + Date.now() / 6e4) * 0.004); spark.push(+v.toFixed(2)); }
+  for (let i = 0; i < 60; i++) { v *= 1 + ((Math.sin(h + i * 0.15 + Date.now() / 6e4) + Math.sin(h * 7 + i * 0.6) * 0.5) * 0.002); spark.push(+v.toFixed(2)); }
   const price = spark.at(-1);
   return { price, prev: base, change: price - base, changePct: ((price - base) / base) * 100, currency: "USD", spark, mock: true };
 }

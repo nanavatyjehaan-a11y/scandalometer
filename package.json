@@ -1,2 +1,7 @@
-{ "name": "scandal-o-meter", "version": "1.0.0", "private": true,
-  "scripts": { "start": "node server.js", "demo": "MOCK=1 node server.js" } }
+{
+  "name": "scandal-o-meter",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": { "start": "node server.js", "demo": "MOCK=1 node server.js" }
+}
